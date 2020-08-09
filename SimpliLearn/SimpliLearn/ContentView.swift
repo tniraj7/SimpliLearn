@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var tap = false
+    @State var press = false
     
     var body: some View {
         
@@ -11,10 +12,10 @@ struct ContentView: View {
                 .frame(width: 200, height: 60)
                 .background(
                     ZStack {
-                        Color(#colorLiteral(red: 0.8007653372, green: 0.8816142425, blue: 0.9373870802, alpha: 1))
+                        Color(press ? #colorLiteral(red: 0.7450980392, green: 0.8, blue: 0.8980392157, alpha: 1) : #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) )
                         
                         RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color( press ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) : #colorLiteral(red: 0.7294117647, green: 0.7843137255, blue: 0.8941176471, alpha: 1)))
                             .blur(radius: 4)
                             .offset(x: -8, y: -8)
                         
@@ -28,15 +29,19 @@ struct ContentView: View {
                     }
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                .shadow(color: Color(#colorLiteral(red: 0.738869863, green: 0.8113246438, blue: 0.900390625, alpha: 1)), radius: 20, x: 20, y: 20)
-                .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 20, x: -20, y: -20)
+                .shadow(color: press ? Color(#colorLiteral(red: 0.7450980392, green: 0.8, blue: 0.8980392157, alpha: 1)) : Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)), radius: 20, x: -20, y: -20)
+                .shadow(color: press ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)) : Color(#colorLiteral(red: 0.7294117647, green: 0.7843137255, blue: 0.8941176471, alpha: 1)), radius: 20, x: 20, y: 20)
                 .scaleEffect(tap ? 1.2 : 1)
                 .gesture(
-                    LongPressGesture().onChanged { value in
+                    LongPressGesture(minimumDuration: 0.5, maximumDistance: 10)
+                        .onChanged { value in
                         self.tap = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             self.tap = false
                         }
+                    }
+                    .onEnded { value in
+                        self.press.toggle()
                     }
                 )
                 .animation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0))
