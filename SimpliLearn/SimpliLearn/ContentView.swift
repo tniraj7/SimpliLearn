@@ -4,12 +4,25 @@ struct ContentView: View {
     
     var body: some View {
         
-        VStack {
+        VStack(spacing: 50.0) {
             RectangleButton()
+            
+            VStack {
+                Image(systemName: "sun.max")
+                    .font(.system(size: 44, weight: .light))
+            }
+            .frame(width: 100, height: 100)
+            .background(
+                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+            .clipShape(Circle())
+            .shadow(color: Color.white, radius: 20, x: -20, y: -20)
+            .shadow(color: Color(#colorLiteral(red: 0.7450980392, green: 0.8, blue: 0.8980392157, alpha: 1)), radius: 20, x: 20, y: 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(#colorLiteral(red: 0.8796049263, green: 0.9333333333, blue: 0.9624625428, alpha: 1)))
+        .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
         .edgesIgnoringSafeArea(.all)
+        .animation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0))
         
     }
 }
