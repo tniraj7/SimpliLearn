@@ -7,17 +7,7 @@ struct ContentView: View {
         VStack(spacing: 50.0) {
             RectangleButton()
             
-            VStack {
-                Image(systemName: "sun.max")
-                    .font(.system(size: 44, weight: .light))
-            }
-            .frame(width: 100, height: 100)
-            .background(
-                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
-            )
-            .clipShape(Circle())
-            .shadow(color: Color.white, radius: 20, x: -20, y: -20)
-            .shadow(color: Color(#colorLiteral(red: 0.7450980392, green: 0.8, blue: 0.8980392157, alpha: 1)), radius: 20, x: 20, y: 20)
+            CircleButton()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
@@ -82,6 +72,49 @@ struct RectangleButton: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         self.tap = false
                     }
+                }
+                .onEnded { value in
+                    self.press.toggle()
+                }
+            )
+    }
+}
+
+struct CircleButton: View {
+    
+    @State var tap = false
+    @State var press = false
+    
+    var body: some View {
+        VStack {
+            Image(systemName: "sun.max")
+                .font(.system(size: 44, weight: .light))
+        }
+        .frame(width: 100, height: 100)
+        .background(
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                
+                Circle()
+                    .stroke(Color.clear, lineWidth: 10)
+                    .shadow(color: Color(#colorLiteral(red: 0.7450980392, green: 0.8, blue: 0.8980392157, alpha: 1)), radius: 3, x: -5, y: -5)
+                
+                Circle()
+                    .stroke(Color.clear, lineWidth: 10)
+                    .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 3, x: 3, y: 3)
+            }
+            )
+            .clipShape(Circle())
+            .shadow(color: Color.white, radius: 20, x: -20, y: -20)
+            .shadow(color: Color(#colorLiteral(red: 0.7450980392, green: 0.8, blue: 0.8980392157, alpha: 1)), radius: 20, x: 20, y: 20)
+            .scaleEffect(tap ? 1.2 : 1)
+            .gesture(
+                LongPressGesture()
+                    .onChanged { value in
+                        self.tap = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            self.tap = false
+                        }
                 }
                 .onEnded { value in
                     self.press.toggle()
