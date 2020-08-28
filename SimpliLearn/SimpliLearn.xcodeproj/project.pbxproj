@@ -15,6 +15,7 @@
 		345BC13A24DB2C550022E1A3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 345BC13924DB2C550022E1A3 /* Preview Assets.xcassets */; };
 		345BC13D24DB2C550022E1A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 345BC13B24DB2C550022E1A3 /* LaunchScreen.storyboard */; };
 		3468D5F424EA873500F39A46 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3468D5F324EA873500F39A46 /* Buttons.swift */; };
+		34AA6FE224F88F6E00A24652 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AA6FE124F88F6E00A24652 /* BlurView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		345BC13C24DB2C550022E1A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		345BC13E24DB2C550022E1A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3468D5F324EA873500F39A46 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		34AA6FE124F88F6E00A24652 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,13 +64,14 @@
 			children = (
 				345BC13024DB2C540022E1A3 /* AppDelegate.swift */,
 				3468D5F324EA873500F39A46 /* Buttons.swift */,
+				34AA6FE124F88F6E00A24652 /* BlurView.swift */,
 				345BC13224DB2C540022E1A3 /* SceneDelegate.swift */,
 				345BC13424DB2C540022E1A3 /* ContentView.swift */,
+				341AB99524F11320001CEB33 /* LoginView.swift */,
 				345BC13624DB2C550022E1A3 /* Assets.xcassets */,
 				345BC13B24DB2C550022E1A3 /* LaunchScreen.storyboard */,
 				345BC13E24DB2C550022E1A3 /* Info.plist */,
 				345BC13824DB2C550022E1A3 /* Preview Content */,
-				341AB99524F11320001CEB33 /* LoginView.swift */,
 			);
 			path = SimpliLearn;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				345BC13524DB2C540022E1A3 /* ContentView.swift in Sources */,
 				341AB99624F11320001CEB33 /* LoginView.swift in Sources */,
 				3468D5F424EA873500F39A46 /* Buttons.swift in Sources */,
+				34AA6FE224F88F6E00A24652 /* BlurView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
