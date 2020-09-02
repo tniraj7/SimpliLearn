@@ -4,60 +4,81 @@ struct LoginView: View {
     
     @State var email = ""
     @State var password = ""
+    @State var isFocused = false
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
     
     var body: some View {
-        ZStack(alignment: .top) {
+        ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             
-            Color("background2").edgesIgnoringSafeArea(.bottom)
+            ZStack(alignment: .top) {
+                
+                Color("background2").edgesIgnoringSafeArea(.bottom)
+                    .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+                    
+                CoverView()
+                
+                VStack {
+                    HStack {
+                        Image(systemName: "person.crop.circle.fill")
+                            .foregroundColor(Color(#colorLiteral(red: 0.6549019608, green: 0.7137254902, blue: 0.862745098, alpha: 1)))
+                            .frame(width: 44, height: 44)
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 5)
+                            .padding(.leading)
+                        
+                        TextField("Your email".uppercased(), text: $email)
+                            .keyboardType(.emailAddress)
+                            .font(.subheadline)
+                            .padding(.leading)
+                            .frame(height: 44)
+                            .onTapGesture {
+                                self.isFocused = true
+                            }
+                    }
+                    
+                    Divider().padding(.leading, 80)
+                    
+                    HStack {
+                        Image(systemName: "lock.fill")
+                            .foregroundColor(Color(#colorLiteral(red: 0.6549019608, green: 0.7137254902, blue: 0.862745098, alpha: 1)))
+                            .frame(width: 44, height: 44)
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 5)
+                            .padding(.leading)
+                        
+                        SecureField("Password".uppercased(), text: $password)
+                            .keyboardType(.default)
+                            .font(.subheadline)
+                            .padding(.leading)
+                            .frame(height: 44)
+                            .onTapGesture {
+                                self.isFocused = false
+                                self.hideKeyboard()
+                            }
+                    }
+                    
+                }
+                .frame(height: 136)
+                .frame(maxWidth: .infinity)
+                .background(BlurView(style: .systemMaterial))
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                
-            CoverView()
-            
-            VStack {
-                HStack {
-                    Image(systemName: "person.crop.circle.fill")
-                        .foregroundColor(Color(#colorLiteral(red: 0.6549019608, green: 0.7137254902, blue: 0.862745098, alpha: 1)))
-                        .frame(width: 44, height: 44)
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 5)
-                        .padding(.leading)
-                    
-                    TextField("Your email".uppercased(), text: $email)
-                        .keyboardType(.emailAddress)
-                        .font(.subheadline)
-                        .padding(.leading)
-                        .frame(height: 44)
-                }
-                
-                Divider().padding(.leading, 80)
-                
-                HStack {
-                    Image(systemName: "lock.fill")
-                        .foregroundColor(Color(#colorLiteral(red: 0.6549019608, green: 0.7137254902, blue: 0.862745098, alpha: 1)))
-                        .frame(width: 44, height: 44)
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 5)
-                        .padding(.leading)
-                    
-                    SecureField("Password".uppercased(), text: $password)
-                        .keyboardType(.default)
-                        .font(.subheadline)
-                        .padding(.leading)
-                        .frame(height: 44)
-                }
+                .shadow(color: Color.black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .padding(.horizontal)
+                .offset(y: 460)
                 
             }
-            .frame(height: 136)
-            .frame(maxWidth: .infinity)
-            .background(BlurView(style: .systemMaterial))
-            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-            .shadow(color: Color.black.opacity(0.15), radius: 20, x: 0, y: 20)
-            .padding(.horizontal)
-            .offset(y: 460)
-            
+            .offset(y: isFocused ? -300 : 0)
+            .animation(isFocused ? .easeInOut : nil)
+            .onTapGesture {
+                self.isFocused = false
+                self.hideKeyboard()
+            }
         }
     }
 }
