@@ -5,6 +5,8 @@ struct LoginView: View {
     @State var email = ""
     @State var password = ""
     @State var isFocused = false
+    @State var showAlert = false
+    @State var alertMessage = "Something went wrong."
     
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -78,7 +80,11 @@ struct LoginView: View {
                     
                     Spacer()
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        self.showAlert = true
+                        self.hideKeyboard()
+                        self.isFocused = false
+                    }, label: {
                         Text("Log in").foregroundColor(.black)
                     })
                     .padding(12)
@@ -86,7 +92,9 @@ struct LoginView: View {
                     .background(Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)))
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     .shadow(color: Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)).opacity(0.3), radius: 20, x: 0, y: 20)
-                    
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text("Error"), message: Text(self.alertMessage), dismissButton: .default(Text("OK")))
+                    }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 .padding()
