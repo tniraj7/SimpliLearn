@@ -61,10 +61,8 @@ struct LoginView: View {
                             .frame(height: 44)
                             .onTapGesture {
                                 self.isFocused = false
-                                self.hideKeyboard()
                             }
                     }
-                    
                 }
                 .frame(height: 136)
                 .frame(maxWidth: .infinity)
@@ -135,7 +133,7 @@ struct CoverView: View {
             .offset(x: viewState.width/15, y: viewState.height/15)
             .multilineTextAlignment(.center)
             
-            Text("80 Hours of SwiftUI, Flutter, and design Tools.")
+            Text("80 Hours of SwiftUI, Flutter, and design tools.")
                 .font(.subheadline)
                 .frame(width: 250)
                 .offset(x: viewState.width/20, y: viewState.height/20)
